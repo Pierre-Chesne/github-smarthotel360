@@ -1,4 +1,4 @@
-name: Deploiement Smart Hotel 360
+name: Deploiement SmartHotel360
 
 on:
   push:
@@ -6,26 +6,11 @@ on:
       - dev
 
 jobs:
-  build:
+
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: repo
-        uses: actions/checkout@v2
-
-      - name: Setup Java
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
-
-      - name: Creation du package ROOT.war
-        run: mvn --batch-mode --update-snapshots verify
-
-      - name: copie des artefacts
-        run: mkdir staging && cp target/*.war staging
-        
-      - name: Publication des artefacts  
-        uses: actions/upload-artifact@v2
-        with:
-          name: Package
-          path: staging
+      - name: check version
+        run: |
+          ansible --version
