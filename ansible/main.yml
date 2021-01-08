@@ -23,3 +23,17 @@
             settings:
               java_container: tomcat
               java_container_version: "9.0"
+
+    - azure.azcollection.azure_rm_mysqlserver:      
+        resource_group: "{{ resource_group }}"
+        name: "{{ mysqlserver_name }}"
+        sku:
+          name: B_Gen5_1
+          tier: Basic
+        location: "{{ location }}"
+        version: "5.7"
+        enforce_ssl: True
+        admin_username: "{{ admin_username }}"
+        admin_password: "{{ admin_password }}"
+        storage_mb: 51200
+    

@@ -9,6 +9,10 @@ env:
   AZURE_RG: RG-Smart-Hotel
   AZURE_LOCATION: westeurope
   AZURE_WEB_APP_NAME: smh360webd4040cc
+  AZURE_DB_SERVER: smh360mysql40405cc
+  AZURE_DB_ADMIN: sqladmin
+  AZURE_DB_PW: P2ssw0rd@123
+
   
 
 jobs:
@@ -34,6 +38,6 @@ jobs:
 
       - name: Execution du plabook Ansible
         run: |    
-          ansible-playbook ./ansible/main.yml --extra-vars "resource_group=${{ env.AZURE_RG }} location=${{ env.AZURE_LOCATION }} webapp_name=${{ env.AZURE_WEB_APP_NAME }}"
+          ansible-playbook ./ansible/main.yml --extra-vars "resource_group=${{ env.AZURE_RG }} location=${{ env.AZURE_LOCATION }} webapp_name=${{ env.AZURE_WEB_APP_NAME }} mysqlserver_name=${{ env.AZURE_DB_SERVER }} admin_username=${{ env.AZURE_DB_ADMIN }} admin_password=${{ AZURE_DB_PW }}"
 
              
