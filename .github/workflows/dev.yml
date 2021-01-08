@@ -6,8 +6,8 @@ on:
       - dev
 
 env:
-  resource_group: RG-Smart-Hotel
-  location: westeurope   
+  RESOURCE_GROUP: RG-Smart-Hotel
+  LOCATION: westeurope   
 
 jobs:
 
