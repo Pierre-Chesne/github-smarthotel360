@@ -1,0 +1,6 @@
+name: deploiement Smart Hotel 365
+
+on:
+  push:
+    branches:
+      - dev
