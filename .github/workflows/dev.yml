@@ -67,7 +67,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy
 
-    step:
+    steps:
       - name: Creation dossier Artifact
         run: |
           mkdir templateArtifacts
