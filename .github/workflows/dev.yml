@@ -11,8 +11,7 @@ env:
   AZURE_WEB_APP_NAME: smh360webd4040cc
   AZURE_DB_SERVER: smh360mysql40405cc
   AZURE_DB_ADMIN: sqladmin
-  AZURE_DB_PW: P2ssw0rd@123
-  
+  AZURE_DB_PW: P2ssw0rd@123  
 
 jobs:
 
