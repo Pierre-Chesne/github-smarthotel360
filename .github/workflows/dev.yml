@@ -61,4 +61,21 @@ jobs:
 
       - name: Execution du plabook Ansible
         run: |    
-          ansible-playbook ./ansible/main.yml --extra-vars "resource_group=${{ env.AZURE_RG }} location=${{ env.AZURE_LOCATION }} webapp_name=${{ env.AZURE_WEB_APP_NAME }} appplan_name= ${{ env.AZURE_PLAN_NAME }} mysqlserver_name=${{ env.AZURE_DB_SERVER }} admin_username=${{ env.AZURE_DB_ADMIN }} admin_password=${{ env.AZURE_DB_PW }} mysqldb_name=${{ env.AZURE_DB_NAME }}"        
+          ansible-playbook ./ansible/main.yml --extra-vars "resource_group=${{ env.AZURE_RG }} location=${{ env.AZURE_LOCATION }} webapp_name=${{ env.AZURE_WEB_APP_NAME }} app_plan_name= ${{ env.AZURE_PLAN_NAME }} mysqlserver_name=${{ env.AZURE_DB_SERVER }} admin_username=${{ env.AZURE_DB_ADMIN }} admin_password=${{ env.AZURE_DB_PW }} mysqldb_name=${{ env.AZURE_DB_NAME }}"
+  
+  deploy:
+    runs-on: ubuntu-latest
+    needs: deploy
+
+    step:
+      - name: Creation dossier Artifact
+        run: |
+          mkdir templateArtifacts
+
+      - name: download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: Package
+          path: templateArtifacts/
+          
+
