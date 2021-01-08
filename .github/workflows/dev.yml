@@ -5,9 +5,6 @@ on:
     branches:
       - dev
 
-env:
-  RESOURCE_GROUP: RG-Smart-Hotel
-  LOCATION: westeurope   
 
 jobs:
 
@@ -32,4 +29,8 @@ jobs:
 
       - name: Execution du plabook Ansible
         run: |    
-          ansible-playbook ./ansible/main.yml   
+          ansible-playbook ./ansible/main.yml
+        env:
+          RESOURCE_GROUP: RG-Smart-Hotel
+          LOCATION: westeurope 
+             
