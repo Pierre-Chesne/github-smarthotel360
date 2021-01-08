@@ -1,19 +1,18 @@
 ---
-- name: Using Azure collection
+- name: SMH360 Using Azure collection
   hosts: localhost
 
   tasks:
     - azure.azcollection.azure_rm_resourcegroup:
         name: "{{ resource_group }}"
         location: "{{ location }}"
-
     
     - azure.azcollection.azure_rm_webapp:      
         resource_group: "{{ resource_group }}"
         name: "{{ webapp_name }}"
         plan:
           resource_group: "{{ resource_group }}"
-          name: myappplan
+          name: "{{ appplan_name }}"
           is_linux: false
           sku: S2
           number_of_workers: 1
@@ -37,7 +36,6 @@
         admin_password: "{{ admin_password }}"
         storage_mb: 51200
 
-
     - azure.azcollection.azure_rm_resource:      
         api_version: '2017-12-01'
         resource_group: "{{ resource_group }}"
@@ -51,4 +49,9 @@
           properties:
             startIpAddress: "0.0.0.0"
             endIpAddress: "255.255.255.255"
+    
+    - azure.azcollection.azure_rm_mysqldatabase:      
+        resource_group: "{{ resource_group }}"
+        server_name: "{{ mysqlserver_name }}"
+        name: "{{ mysqldb_name }}"
     
