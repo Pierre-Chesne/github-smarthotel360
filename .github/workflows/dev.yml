@@ -8,6 +8,7 @@ on:
 env:
   AZURE_RG: RG-Smart-Hotel
   AZURE_LOCATION: westeurope
+  AZURE_WEB_APP_NAME: smh360webd4040cc
   
 
 jobs:
@@ -33,6 +34,6 @@ jobs:
 
       - name: Execution du plabook Ansible
         run: |    
-          ansible-playbook ./ansible/main.yml --extra-vars "resource_group=${{ env.AZURE_RG }} location=${{ env.AZURE_LOCATION }}"
+          ansible-playbook ./ansible/main.yml --extra-vars "resource_group=${{ env.AZURE_RG }} location=${{ env.AZURE_LOCATION }} webapp_name=${{ env.AZURE_WEB_APP_NAME }}"
 
              

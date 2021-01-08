@@ -6,3 +6,20 @@
     - azure.azcollection.azure_rm_resourcegroup:
         name: "{{ resource_group }}"
         location: "{{ location }}"
+
+    
+    - azure.azcollection.azure_rm_webapp:      
+        resource_group: "{{ resource_group }}"
+        name: "{{ webapp_name }}"
+        plan:
+          resource_group: "{{ resource_group }}"
+          name: myappplan
+          is_linux: false
+          sku: S2
+          number_of_workers: 1
+        frameworks:
+          - name: "java"
+            version: "1.8"
+            settings:
+              java_container: tomcat
+              java_container_version: "9.0"
