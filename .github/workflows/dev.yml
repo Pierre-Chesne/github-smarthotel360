@@ -40,7 +40,7 @@ jobs:
           name: Package
           path: staging
 
-  deploy IaC:
+  deploy-IaC:
     runs-on: ubuntu-latest
     needs: build
 
@@ -63,9 +63,9 @@ jobs:
         run: |    
           ansible-playbook ./ansible/main.yml --extra-vars "resource_group=${{ env.AZURE_RG }} location=${{ env.AZURE_LOCATION }} webapp_name=${{ env.AZURE_WEB_APP_NAME }} app_plan_name= ${{ env.AZURE_PLAN_NAME }} mysqlserver_name=${{ env.AZURE_DB_SERVER }} admin_username=${{ env.AZURE_DB_ADMIN }} admin_password=${{ env.AZURE_DB_PW }} mysqldb_name=${{ env.AZURE_DB_NAME }}"
   
-  deploy:
+  deploy-Appliacation:
     runs-on: ubuntu-latest
-    needs: deploy
+    needs: deploy-IaC
 
     steps:
       - name: Creation dossier Artifact
