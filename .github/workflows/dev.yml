@@ -14,3 +14,4 @@ jobs:
       - name: check version
         run: |
           wget https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt
+          ls -lisa
