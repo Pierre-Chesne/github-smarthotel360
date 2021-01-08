@@ -13,4 +13,4 @@ jobs:
     steps:
       - name: check version
         run: |
-          ansible --version
+          wget https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt
