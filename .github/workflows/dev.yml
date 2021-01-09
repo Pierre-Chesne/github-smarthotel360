@@ -42,7 +42,7 @@ jobs:
 
   deploy-IaC:
     runs-on: ubuntu-latest
-    needs: build
+    needs: build-Application
 
     steps:
       - name: Azure Login
