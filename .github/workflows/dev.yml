@@ -72,7 +72,7 @@ jobs:
         run: |
           mkdir templateArtifacts
 
-      - name: download artifacts
+      - name: Download artifacts
         uses: actions/download-artifact@v2
         with:
           name: Package
@@ -86,3 +86,10 @@ jobs:
         uses: Azure/login@v1
         with:    
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        id: Deploy-to-Azure
+        with:
+          app-name: smh360webd4040cc
+          package: ./templateArtifacts/ROOT.war
