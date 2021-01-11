@@ -86,13 +86,3 @@ jobs:
         uses: Azure/login@v1
         with:    
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: 'Deploy to Azure WebApp'
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: smh360webd4040cc
-          publish-profile: '-SPRING_DATASOURCE_USERNAME sqladmin@smh360mysql40405cc -SPRING_DATASOURCE_PASSWORD P2ssw0rd@123 -SPRING_DATASOURCE_URL jdbc:mysql://smh360mysql40405cc.mysql.database.azure.com:3306/hotel_coupon?useSSL=true&requireSSL=false'
-          package:  templateArtifacts/ROOT.war
-          
-          
-
