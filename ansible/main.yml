@@ -49,7 +49,7 @@
           sku: S2
           number_of_workers: 1
         app_settings:
-          SPRING_DATASOURCE_USERNAME: sqladmin@smh360mysql40405cc
+          SPRING_DATASOURCE_USERNAME: "{{ admin_username }}@{{ mysqlserver_name }}"
           SPRING_DATASOURCE_PASSWORD: "{{ admin_password }}"
           SPRING_DATASOURCE_URL: jdbc:mysql://{{ mysqlserver_name }}.mysql.database.azure.com:3306/hotel_coupon?useSSL=true&requireSSL=false
         frameworks:
@@ -58,4 +58,3 @@
             settings:
               java_container: tomcat
               java_container_version: "9.0"
-              
