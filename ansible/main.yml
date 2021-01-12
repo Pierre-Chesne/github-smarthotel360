@@ -49,9 +49,9 @@
           sku: S2
           number_of_workers: 1
         app_settings:
-          SPRING_DATASOURCE_USERNAME: "{{ admin_username }}"@"{{ mysqlserver_name }}"
-          SPRING_DATASOURCE_PASSWORD: "{{ admin_password }}"
-          SPRING_DATASOURCE_URL: jdbc:mysql://"{{ mysqlserver_name }}".mysql.database.azure.com:3306/hotel_coupon?useSSL=true&requireSSL=false
+          SPRING_DATASOURCE_USERNAME: {{ admin_username }}@{{ mysqlserver_name }}
+          SPRING_DATASOURCE_PASSWORD: {{ admin_password }}
+          SPRING_DATASOURCE_URL: jdbc:mysql://{{ mysqlserver_name }}.mysql.database.azure.com:3306/hotel_coupon?useSSL=true&requireSSL=false
         frameworks:
           - name: "java"
             version: "1.8"
