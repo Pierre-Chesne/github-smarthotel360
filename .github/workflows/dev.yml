@@ -39,3 +39,26 @@ jobs:
         with:
           name: Ansible-Playbook
           path: ansible
+
+  Deploy_to_Dev:
+    needs: build-Application
+
+    environment:
+      name: dev
+      url: ${{ steps.deploy-to-azure.outputs.webapp-url }}
+    
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Recuperation des artefacts
+        uses: actions/download-artifact@v2
+
+      - name: Display structure of downloaded files
+        run: ls -R
+
+
+    
+
+    
+
+
