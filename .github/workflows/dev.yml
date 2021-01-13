@@ -7,8 +7,7 @@ on:
 
 env:
   AZURE_RG: RG-Smart-Hotel
-  AZURE_LOCATION: westeurope
-  #AZURE_PLAN_NAME: smh360plan  
+  AZURE_LOCATION: westeurope  
 
 jobs:
   build-Application:
@@ -73,10 +72,6 @@ jobs:
           name: Package
           path: staging/
 
-      - name: Display structure of downloaded files
-        run: ls -R
-        working-directory: staging/
-
       - name: Azure Login
         uses: Azure/login@v1
         with:    
@@ -86,5 +81,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: Deploy-to-Azure
         with:
-          app-name: smh360webd4040cc
+          app-name: ${{ secrets.AZURE_WEB_APP_NAME }}
           package: ./staging/ROOT.war
