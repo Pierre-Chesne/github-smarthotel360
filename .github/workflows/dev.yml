@@ -10,9 +10,6 @@ env:
   AZURE_LOCATION: westeurope
   AZURE_PLAN_NAME: smh360plan
   AZURE_WEB_APP_NAME: smh360webd4040cc
-  #AZURE_DB_SERVER: smh360mysql40405cc
-  #AZURE_DB_ADMIN: sqladmin  
-  #AZURE_DB_NAME: hotel_coupon
 
 jobs:
   build-Application:
