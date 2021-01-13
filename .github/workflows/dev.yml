@@ -11,8 +11,7 @@ env:
   AZURE_PLAN_NAME: smh360plan
   AZURE_WEB_APP_NAME: smh360webd4040cc
   AZURE_DB_SERVER: smh360mysql40405cc
-  AZURE_DB_ADMIN: sqladmin
-  #AZURE_DB_PW: P2ssw0rd@123
+  AZURE_DB_ADMIN: sqladmin  
   AZURE_DB_NAME: hotel_coupon
 
 jobs:
@@ -20,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: repo
+      - name: Repuperation du repo
         uses: actions/checkout@v2
 
       - name: Setup Java
@@ -28,10 +27,10 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Creation du package ROOT.war
+      - name: Creation du package ROOT.war avec Maven
         run: mvn --batch-mode --update-snapshots verify
 
-      - name: copie des artefacts
+      - name: Copie des artefacts
         run: mkdir staging && cp target/*.war staging
 
       - name: Publication des artefacts  
@@ -70,17 +69,17 @@ jobs:
     steps:
       - name: Creation dossier Artifact
         run: |
-          mkdir templateArtifacts
+          mkdir staging
 
       - name: Download artifacts
         uses: actions/download-artifact@v2
         with:
           name: Package
-          path: templateArtifacts/
+          path: staging/
 
       - name: Display structure of downloaded files
         run: ls -R
-        working-directory: templateArtifacts/
+        working-directory: staging/
 
       - name: Azure Login
         uses: Azure/login@v1
@@ -92,4 +91,4 @@ jobs:
         id: Deploy-to-Azure
         with:
           app-name: smh360webd4040cc
-          package: ./templateArtifacts/ROOT.war
+          package: ./staging/ROOT.war
