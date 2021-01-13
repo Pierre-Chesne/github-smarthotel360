@@ -56,6 +56,11 @@ jobs:
       - name: Display structure of downloaded files
         run: ls -R
 
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:    
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
 
     
 
