@@ -8,8 +8,8 @@ on:
 env:
   AZURE_RG: RG-Smart-Hotel
   AZURE_LOCATION: westeurope
-  AZURE_PLAN_NAME: smh360plan
-  AZURE_WEB_APP_NAME: smh360webd4040cc
+  #AZURE_PLAN_NAME: smh360plan
+  #AZURE_WEB_APP_NAME: smh360webd4040cc
 
 jobs:
   build-Application:
@@ -57,7 +57,7 @@ jobs:
 
       - name: Execution du plabook Ansible
         run: |    
-          ansible-playbook ./ansible/main.yml --extra-vars "resource_group=${{ env.AZURE_RG }} location=${{ env.AZURE_LOCATION }} webapp_name=${{ env.AZURE_WEB_APP_NAME }} app_plan_name=${{ secrets.AZURE_PLAN_NAME }} mysqlserver_name=${{ secrets.AZURE_DB_SERVER }} admin_username=${{ secrets.AZURE_DB_ADMIN }} admin_password=${{ secrets.AZURE_DB_PW }} mysqldb_name=${{ secrets.AZURE_DB_NAME }}"
+          ansible-playbook ./ansible/main.yml --extra-vars "resource_group=${{ env.AZURE_RG }} location=${{ env.AZURE_LOCATION }} webapp_name=${{ secrets.AZURE_WEB_APP_NAME }} app_plan_name=${{ secrets.AZURE_PLAN_NAME }} mysqlserver_name=${{ secrets.AZURE_DB_SERVER }} admin_username=${{ secrets.AZURE_DB_ADMIN }} admin_password=${{ secrets.AZURE_DB_PW }} mysqldb_name=${{ secrets.AZURE_DB_NAME }}"
   
   deploy-Application:
     runs-on: ubuntu-latest
@@ -89,4 +89,3 @@ jobs:
         with:
           app-name: smh360webd4040cc
           package: ./staging/ROOT.war
-          
