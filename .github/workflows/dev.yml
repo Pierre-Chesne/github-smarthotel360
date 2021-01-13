@@ -43,10 +43,7 @@ jobs:
   Deploy_to_Dev:
     needs: build-Application
 
-    environment:
-      name: dev
-      url: ${{ steps.deploy-to-azure.outputs.webapp-url }}
-    
+   
     runs-on: ubuntu-20.04
 
     steps:
@@ -73,7 +70,7 @@ jobs:
 
       - name: Deploiement de l'appication JAVA
         uses: azure/webapps-deploy@v2
-        id: deploy-to-azure
+        #id: deploy-to-azure
         with:
           app-name: ${{ secrets.AZURE_WEB_APP_NAME }}
           package: ./Package-WAR/ROOT.war
