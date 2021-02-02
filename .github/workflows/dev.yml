@@ -1,0 +1,80 @@
+name: Deploiement SmartHotel360
+
+on:
+  push:
+    branches:
+      - dev
+
+env:
+  AZURE_RG: RG-Smart-Hotel
+  AZURE_LOCATION: westeurope
+  AZURE_WEB_APP_NAME: smh360webd4040cc   
+
+jobs:
+  Build-Application:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Repuperation du repo
+        uses: actions/checkout@v2
+
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Creation du package ROOT.war avec Maven
+        run: mvn --batch-mode --update-snapshots verify
+
+      - name: Copie du fichier artefacts ROOT.war 
+        run: mkdir warfile && cp target/*.war warfile
+
+      - name: Publication du fichier ROOT.war en artefact  
+        uses: actions/upload-artifact@v2
+        with:
+          name: Package-WAR
+          path: warfile
+
+      - name: Publication du playbook Ansible en artefact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Ansible-Playbook
+          path: ansible
+
+  Deploy_to_Dev:
+    needs: build-Application
+
+    environment:
+      name: dev
+      url: ${{ steps.deploy-to-azure.outputs.webapp-url }}
+   
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Recuperation des artefacts
+        uses: actions/download-artifact@v2
+
+      - name: Display structure of downloaded files
+        run: ls -R
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:    
+          creds: ${{ secrets.AZURE_CREDENTIALS }}      
+
+      - name: Installation Module Azure pour Ansible
+        run: |
+          wget https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt
+          pip3 install -r requirements-azure.txt
+          ansible-galaxy collection install azure.azcollection
+
+      - name: Execution du plabook Ansible
+        run: |    
+          ansible-playbook ./Ansible-Playbook/main.yml --extra-vars "resource_group=${{ env.AZURE_RG }} location=${{ env.AZURE_LOCATION }} app_plan_name=${{ secrets.AZURE_PLAN_NAME }} webapp_name=${{ env.AZURE_WEB_APP_NAME }} mysqlserver_name=${{ secrets.AZURE_DB_SERVER }} admin_username=${{ secrets.AZURE_DB_ADMIN }} admin_password=${{ secrets.AZURE_DB_PW }} mysqldb_name=${{ secrets.AZURE_DB_NAME }}"
+
+      - name: Deploiement de l'application JAVA
+        uses: azure/webapps-deploy@v2
+        id: deploy-to-azure
+        with:
+          app-name: ${{ env.AZURE_WEB_APP_NAME }}
+          package: ./Package-WAR/ROOT.war          
