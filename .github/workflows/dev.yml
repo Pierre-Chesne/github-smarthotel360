@@ -1,9 +1,7 @@
 name: Deploiement SmartHotel360
 
-on:
-  push:
-    branches:
-      - dev
+on: workflow_dispatch
+
 
 env:
   AZURE_RG: RG-Smart-Hotel
