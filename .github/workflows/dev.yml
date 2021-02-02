@@ -77,5 +77,4 @@ jobs:
         id: deploy-to-azure
         with:
           app-name: ${{ env.AZURE_WEB_APP_NAME }}
-          package: ./Package-WAR/ROOT.war
-          
+          package: ./Package-WAR/ROOT.war          
