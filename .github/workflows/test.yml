@@ -6,9 +6,15 @@ on:
       - dev-01 
 
 jobs:
-  Build-Application:
+  Test:
     runs-on: ubuntu-20.04
 
     steps:
       - name: Repuperation du repo
         uses: actions/checkout@v2
+
+      - name: Test Ansible
+        uses: ansible/ansible-lint-action@master
+        with:
+          targets: |
+            .ansible/main.yml
