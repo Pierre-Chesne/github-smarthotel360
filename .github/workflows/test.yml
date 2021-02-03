@@ -1,0 +1,14 @@
+name: Test code
+
+on: 
+  push:
+    branches:
+      - dev-01 
+
+jobs:
+  Build-Application:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Repuperation du repo
+        uses: actions/checkout@v2
