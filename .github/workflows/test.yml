@@ -8,3 +8,5 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
+      - name: test code
+        uses: nvuillam/mega-linter@v4.26.1
