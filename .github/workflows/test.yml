@@ -21,6 +21,8 @@ jobs:
 
       - name: Perform Scan
         uses: ShiftLeftSecurity/scan-action@master
+        with:
+          type: "credscan"
 
       - name: Setup Java
         uses: actions/setup-java@v1
