@@ -19,7 +19,7 @@
         version: "5.7"
         enforce_ssl: True
         admin_username: "{{ admin_username }}"
-        admin_password: Password123$
+        admin_password: "{{ admin_password }}"
         storage_mb: 51200
 
     - name: Parametrage regle du réseau

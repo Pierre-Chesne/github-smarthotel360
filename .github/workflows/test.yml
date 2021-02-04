@@ -23,6 +23,14 @@ jobs:
         uses: ShiftLeftSecurity/scan-action@master
         with:
           type: "credscan"
+          env:
+            WORKSPACE: https://github.com/${{ github.repository }}/blob/${{ github.sha }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: reports
+          path: reports
 
       - name: Setup Java
         uses: actions/setup-java@v1
