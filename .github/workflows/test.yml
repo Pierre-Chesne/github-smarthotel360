@@ -27,7 +27,7 @@ jobs:
           WORKSPACE: https://github.com/${{ github.repository }}/blob/${{ github.sha }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - Name: Upload du rapport en artefact
+      - name: Upload du rapport en artefact
         uses: actions/upload-artifact@v2
         with:
           name: reports
