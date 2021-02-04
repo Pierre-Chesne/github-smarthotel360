@@ -62,8 +62,4 @@
             version: "1.8"
             settings:
               java_container: tomcat
-              java_container_version: "9.0"
-
-      
-
-           
+              java_container_version: "9.0"    
