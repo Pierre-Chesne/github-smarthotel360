@@ -3,33 +3,23 @@ name: Test code
 on: 
   push:
     branches:
-      - dev-01 
+      - dev-01
+
+env:
+  AZURE_RG: RG-Smart-Hotel
+  AZURE_LOCATION: westeurope
+  AZURE_WEB_APP_NAME: smh360webd4040cc 
 
 jobs:
-  Test:
+  Build-Application:
     runs-on: ubuntu-20.04
 
     steps:
       - name: Repuperation du repo
         uses: actions/checkout@v2
 
-      - name: Test Ansible
+      - name: Test Ansible avec 'ansible-lint'
         uses: ansible/ansible-lint-action@master
         with:
           targets: |
             ./ansible/main.yml
-
-      - name: Installation Module Azure pour Ansible
-        run: |
-          wget https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt
-          pip3 install -r requirements-azure.txt
-          ansible-galaxy collection install azure.azcollection
-
-      - name: Azure Login
-        uses: Azure/login@v1
-        with:    
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Execution du plabook Ansible
-        run: |    
-          ansible-playbook ./ansible/main.yml

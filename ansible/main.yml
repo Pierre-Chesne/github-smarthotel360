@@ -5,5 +5,5 @@
   tasks:
     - name: Creation du RG
       azure.azcollection.azure_rm_resourcegroup:
-        name: rgName
-        location: westeurope
+        name: "{{ resource_group }}"
+        location: "{{ location }}"
