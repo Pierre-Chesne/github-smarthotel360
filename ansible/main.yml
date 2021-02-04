@@ -1,5 +1,5 @@
 ---
-- name: SMH360 Using Azure collection
+- name: SMH360 Using Azure Collection Ansible
   hosts: localhost
 
   tasks:
@@ -21,3 +21,18 @@
         admin_username: "{{ admin_username }}"
         admin_password: "{{ admin_password }}"
         storage_mb: 51200
+
+    - name: Parametrage regle du réseau
+      azure.azcollection.azure_rm_resource:
+        api_version: '2017-12-01'
+        resource_group: "{{ resource_group }}"
+        provider: dbformysql
+        resource_type: servers
+        resource_name: "{{ mysqlserver_name }}"
+        subresource:
+          - type: firewallrules
+            name: externalaccess
+        body:
+          properties:
+            startIpAddress: "0.0.0.0"
+            endIpAddress: "255.255.255.255"
