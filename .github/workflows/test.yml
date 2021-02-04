@@ -102,3 +102,4 @@ jobs:
       - name: Execution du plabook Ansible
         run: |    
           ansible-playbook ./Ansible-Playbook/main.yml --extra-vars "resource_group=${{ env.AZURE_RG }} location=${{ env.AZURE_LOCATION }} app_plan_name=${{ secrets.AZURE_PLAN_NAME }} webapp_name=${{ env.AZURE_WEB_APP_NAME }} mysqlserver_name=${{ secrets.AZURE_DB_SERVER }} admin_username=${{ secrets.AZURE_DB_ADMIN }} admin_password=${{ secrets.AZURE_DB_PW }} mysqldb_name=${{ secrets.AZURE_DB_NAME }}"
+          
