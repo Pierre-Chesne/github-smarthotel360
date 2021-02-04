@@ -19,6 +19,9 @@ jobs:
       - name: Repuperation du repo
         uses: actions/checkout@v2
 
+      - name: Perform Scan
+        uses: ShiftLeftSecurity/scan-action@master
+
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
