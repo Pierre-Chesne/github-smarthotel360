@@ -27,4 +27,4 @@ jobs:
 
       - name: Execution du plabook Ansible
         run: |    
-          ansible-playbook ./Ansible-Playbook/main.yml
+          ansible-playbook ./ansible/main.yml
