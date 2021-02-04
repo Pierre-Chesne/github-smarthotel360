@@ -55,7 +55,7 @@
           number_of_workers: 1
         app_settings:
           SPRING_DATASOURCE_USERNAME: '{{ admin_username }}@{{ mysqlserver_name }}'
-          SPRING_DATASOURCE_PASSWORD: "{{ admin_password }}"
+          SPRING_DATASOURCE_PASSWORD: Password123$
           SPRING_DATASOURCE_URL: 'jdbc:mysql://{{ mysqlserver_name }}.mysql.database.azure.com:3306/{{ mysqldb_name }}?useSSL=true&requireSSL=false'
         frameworks:
           - name: "java"
