@@ -44,9 +44,10 @@
         name: "{{ mysqldb_name }}"
 
     - name: Deploiement de App Service
-      azure.azcollection.azure_rm_webapp:
+      azure.azcollection.azure_rm_webappslot:
         resource_group: "{{ resource_group }}"
-        name: "{{ webapp_name }}/slot/stage"
+        webapp_name: "{{ webapp_name }}"
+        name: test
         plan:
           resource_group: "{{ resource_group }}"
           name: "{{ app_plan_name }}"
