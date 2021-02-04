@@ -38,7 +38,28 @@
             endIpAddress: "255.255.255.255"
 
     - name: Creation la base
-      azure.azcollection.azure_rm_resource:
+      azure.azcollection.azure_rm_mysqldatabase:
         resource_group: "{{ resource_group }}"
         server_name: "{{ mysqlserver_name }}"
         name: "{{ mysqldb_name }}"
+
+    - name: Deploiement de App Service
+      azure.azcollection.azure_rm_webapp:
+        resource_group: "{{ resource_group }}"
+        name: "{{ webapp_name }}"
+        plan:
+          resource_group: "{{ resource_group }}"
+          name: "{{ app_plan_name }}"
+          is_linux: false
+          sku: S2
+          number_of_workers: 1
+        app_settings:
+          SPRING_DATASOURCE_USERNAME: '{{ admin_username }}@{{ mysqlserver_name }}'
+          SPRING_DATASOURCE_PASSWORD: "{{ admin_password }}"
+          SPRING_DATASOURCE_URL: 'jdbc:mysql://{{ mysqlserver_name }}.mysql.database.azure.com:3306/{{ mysqldb_name }}?useSSL=true&requireSSL=false'
+        frameworks:
+          - name: "java"
+            version: "1.8"
+            settings:
+              java_container: tomcat
+              java_container_version: "9.0"

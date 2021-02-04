@@ -67,7 +67,7 @@ jobs:
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
-          text: Action GitHub -> "repo GitHub-SmartHotel " -> Build OK -> Check Artefacts !
+          text: Action GitHub -> "repo GitHub-SmartHotel  -> Build OK -> Check Artefacts -> https://github.com/Pierre-Chesne/github-smarthotel360/actions"
           attachments: |
             [
               {
