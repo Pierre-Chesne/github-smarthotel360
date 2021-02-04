@@ -19,7 +19,7 @@ jobs:
       - name: Repuperation du repo
         uses: actions/checkout@v2
 
-      - name: Perform Scan
+      - name: Perform Scan CredScan & Java
         uses: ShiftLeftSecurity/scan-action@master
         with:
           type: "credscan,java"
@@ -62,6 +62,21 @@ jobs:
           name: Ansible-Playbook
           path: ansible
 
+      - name: Slack Notification build ok
+        uses: tokorom/action-slack-incoming-webhook@main
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          text: Action GitHub -> "repo GitHub-SmartHotel " -> Build OK -> Check Artefacts !
+          attachments: |
+            [
+              {
+                "color": "good",
+                "author_name": "${{ github.actor }}",
+                "author_icon": "${{ github.event.sender.avatar_url }}"
+              }
+            ]
+
   Deploy-Env-Test:
     needs: build-Application    
     runs-on: ubuntu-20.04
@@ -83,3 +98,7 @@ jobs:
           wget https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt
           pip3 install -r requirements-azure.txt
           ansible-galaxy collection install azure.azcollection
+
+      - name: Execution du plabook Ansible
+        run: |    
+          ansible-playbook ./Ansible-Playbook/main.yml --extra-vars "resource_group=${{ env.AZURE_RG }} location=${{ env.AZURE_LOCATION }} app_plan_name=${{ secrets.AZURE_PLAN_NAME }} webapp_name=${{ env.AZURE_WEB_APP_NAME }} mysqlserver_name=${{ secrets.AZURE_DB_SERVER }} admin_username=${{ secrets.AZURE_DB_ADMIN }} admin_password=${{ secrets.AZURE_DB_PW }} mysqldb_name=${{ secrets.AZURE_DB_NAME }}"
