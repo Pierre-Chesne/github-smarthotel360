@@ -1,4 +1,4 @@
-name: Test code
+name: Deploiement SmartHotel360 v2
 
 on: 
   push:
@@ -27,7 +27,8 @@ jobs:
           WORKSPACE: https://github.com/${{ github.repository }}/blob/${{ github.sha }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/upload-artifact@v2
+      - Name: Upload du rapport en artefact
+        uses: actions/upload-artifact@v2
         with:
           name: reports
           path: reports
@@ -49,7 +50,7 @@ jobs:
           name: Package-WAR
           path: warfile
 
-      - name: Test Ansible avec 'ansible-lint'
+      - name: Test Code Ansible avec 'ansible-lint'
         uses: ansible/ansible-lint-action@master
         with:
           targets: |
@@ -60,3 +61,25 @@ jobs:
         with:
           name: Ansible-Playbook
           path: ansible
+
+  Deploy-Env-Test:
+    needs: build-Application    
+    runs-on: ubuntu-20.04
+    environment:
+      name: dev
+      url: ${{ steps.deploy-to-azure.outputs.webapp-url }}
+
+    steps:
+      - name: Recuperation des artefacts
+        uses: actions/download-artifact@v2
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:    
+          creds: ${{ secrets.AZURE_CREDENTIALS }}      
+
+      - name: Installation Module Azure pour Ansible
+        run: |
+          wget https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt
+          pip3 install -r requirements-azure.txt
+          ansible-galaxy collection install azure.azcollection
