@@ -36,3 +36,9 @@
           properties:
             startIpAddress: "0.0.0.0"
             endIpAddress: "255.255.255.255"
+
+    - name: Creation la base
+      azure.azcollection.azure_rm_resource:
+        resource_group: "{{ resource_group }}"
+        server_name: "{{ mysqlserver_name }}"
+        name: "{{ mysqldb_name }}"
