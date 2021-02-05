@@ -106,7 +106,7 @@ jobs:
 
       - name: Deploiement de l'application JAVA
         uses: azure/webapps-deploy@v2
-        deploy-to-azure
+        id: deploy-to-azure
         with:
           app-name: ${{ env.AZURE_WEB_APP_NAME }}
           package: ./Package-WAR/ROOT.war
