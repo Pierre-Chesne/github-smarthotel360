@@ -77,7 +77,7 @@ jobs:
               }
             ]
 
-  Deploy-Env-Test:
+  Deploy-To-Dev:
     needs: build-Application    
     runs-on: ubuntu-20.04
     environment:
@@ -107,5 +107,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: deploy-to-azure
         with:
-          app-name: ${{ env.AZURE_WEB_APP_NAME }}
+          app-name: ${{ env.AZURE_WEB_APP_NAME }}-dev
           package: ./Package-WAR/ROOT.war
