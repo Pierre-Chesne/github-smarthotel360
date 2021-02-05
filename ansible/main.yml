@@ -71,7 +71,4 @@
         name: stage
         configuration_source: "{{ webapp_name }}"
         app_settings:
-          testkey: testvalue
-
-
-         
+          testkey: testvalue   
