@@ -9,7 +9,4 @@
         webapp_name: "{{ webapp_name }}"
         name: dev
         swap:
-          action: swap      
-
-      
-
+          action: swap
