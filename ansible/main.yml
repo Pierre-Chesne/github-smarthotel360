@@ -63,3 +63,15 @@
             settings:
               java_container: tomcat
               java_container_version: "9.0"
+
+    - name: Creation d'un App Service Slot
+      azure.azcollection.azure_rm_webappslot:
+        resource_group: "{{ resource_group }}"
+        webapp_name: "{{ webapp_name }}"
+        name: stage
+        configuration_source: "{{ webapp_name }}"
+        app_settings:
+          testkey: testvalue
+
+
+         
