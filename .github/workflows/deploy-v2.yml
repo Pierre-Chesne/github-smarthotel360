@@ -114,4 +114,4 @@ jobs:
       - name: Execution du plabook Swap / Slot dev
         id: deploy-to-azure
         run: |    
-          ansible-playbook ./Ansible-Playbook/swap.yml --extra-vars "resource_group=${{ env.AZURE_RG }} webapp_name=${{ env.AZURE_WEB_APP_NAME }}
+          ansible-playbook ./Ansible-Playbook/swap.yml --extra-vars "resource_group=${{ env.AZURE_RG }} webapp_name=${{ env.AZURE_WEB_APP_NAME }}"
