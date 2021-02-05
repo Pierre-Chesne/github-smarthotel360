@@ -106,12 +106,11 @@ jobs:
 
       - name: Deploiement de l'application JAVA
         uses: azure/webapps-deploy@v2
-        #id: deploy-to-azure
+        deploy-to-azure
         with:
           app-name: ${{ env.AZURE_WEB_APP_NAME }}
           package: ./Package-WAR/ROOT.war
 
-      - name: Execution du plabook Swap / Slot dev
-        id: deploy-to-azure
-        run: |    
-          ansible-playbook ./Ansible-Playbook/swap.yml --extra-vars "resource_group=${{ env.AZURE_RG }} webapp_name=${{ env.AZURE_WEB_APP_NAME }}"
+      #- name: Execution du plabook Swap / Slot dev        
+      #  run: |    
+      #    ansible-playbook ./Ansible-Playbook/swap.yml --extra-vars "resource_group=${{ env.AZURE_RG }} webapp_name=${{ env.AZURE_WEB_APP_NAME }}"
