@@ -107,5 +107,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: deploy-to-azure
         with:
-          app-name: ${{ env.AZURE_WEB_APP_NAME }}-dev
+          app-name: ${{ env.AZURE_WEB_APP_NAME }}
           package: ./Package-WAR/ROOT.war
