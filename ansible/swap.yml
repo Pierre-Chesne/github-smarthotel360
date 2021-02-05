@@ -1,0 +1,15 @@
+---
+- name: Swap slot Dev
+  hosts: localhost
+
+  tasks:
+    - name: Swap Dev
+      azure.azcollection.azure_rm_webappslot:
+        resource_group: "{{ resource_group }}"
+        webapp_name: "{{ webapp_name }}"
+        name: dev
+        swap:
+          action: swap      
+
+      
+

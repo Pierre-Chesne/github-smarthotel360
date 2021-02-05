@@ -55,6 +55,7 @@ jobs:
         with:
           targets: |
             ./ansible/main.yml
+            ./ansible/swap.yml
 
       - name: Publication du playbook Ansible en artefact
         uses: actions/upload-artifact@v2
@@ -99,14 +100,18 @@ jobs:
           pip3 install -r requirements-azure.txt
           ansible-galaxy collection install azure.azcollection
 
-      - name: Execution du plabook Ansible
+      - name: Execution du plabook Ansible IaC
         run: |    
           ansible-playbook ./Ansible-Playbook/main.yml --extra-vars "resource_group=${{ env.AZURE_RG }} location=${{ env.AZURE_LOCATION }} app_plan_name=${{ secrets.AZURE_PLAN_NAME }} webapp_name=${{ env.AZURE_WEB_APP_NAME }} mysqlserver_name=${{ secrets.AZURE_DB_SERVER }} admin_username=${{ secrets.AZURE_DB_ADMIN }} admin_password=${{ secrets.AZURE_DB_PW }} mysqldb_name=${{ secrets.AZURE_DB_NAME }}"
 
       - name: Deploiement de l'application JAVA
         uses: azure/webapps-deploy@v2
-        id: deploy-to-azure
+        #id: deploy-to-azure
         with:
           app-name: ${{ env.AZURE_WEB_APP_NAME }}
           package: ./Package-WAR/ROOT.war
-          
+
+      - name: Execution du plabook Swap / Slot dev
+        id: deploy-to-azure
+        run: |    
+          ansible-playbook ./Ansible-Playbook/swap.yml --extra-vars "resource_group=${{ env.AZURE_RG }} webapp_name=${{ env.AZURE_WEB_APP_NAME }}
